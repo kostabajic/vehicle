@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for model in models %}
+            <li><a href="/models/{{ model.code}}">{{ model.code }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="form-group">
+        <select class="col-sm-offset-3 form-control   " style="width:50%" id="selectMake">
+            <option value=""></option>
+            {% for make in makes %}
+                <option value="{{ make.code }}">{{ make.code }} - count: {{ model_count[make.id] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group" id="ajax-results">
+
+    </div>
+    {% block javascript %}
+         <script >
+         $(document).ready(function(){
+                 $("#selectMake").change(function () {
+                    var makeCode= $(this).val();
+                    if(makeCode!='')
+                        $.ajax({
+                            url:'/models/{{ type }}/'+makeCode,
+                            type: "POST",
+                            dataType: "json",
+                            async: true,
+                            success: function (data)
+                            {
+                                $('div#ajax-results').empty();
+                                var string=' <ul class="list-group-show ">';
+                                if(data.output==-1)
+                                    string='<li class="col-sm-offset-3  list-group-item list-group-item-warning " style="width:50%"><strong>No models available!</strong></li>';
+                                else
+                                    $.each(data.output,function( index,value ) {
+                                        string+='<li class=" col-sm-offset-3  list-group-item list-group-item-success " style="width:50%" ><strong>'+value.code+'</strong>  '+value.description+'</li>';
+                                    })
+                                string+='</ul>';
+                                $('div#ajax-results').append(string);
+
+                            }
+                        });
+                    else
+                        $('div#ajax-results').empty();
+
+                });
+             })
+        </script>
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My cool blog posts{% endblock %}
+
+{% block body %}
+    <div class="form-group" >
+        <ul>
+            {% for vehicle_type in vehicle_types %}
+                <li class=" col-sm-offset-3  list-group-item list-group-item-success " style="width:50%" ><a href="/makes/{{ vehicle_type.code }}">&nbsp;&nbsp;&nbsp;Name: <strong>{{ vehicle_type.description }}</strong>&nbsp;&nbsp;&nbsp;Code : <strong>{{ vehicle_type.code }}</strong>&nbsp;&nbsp;&nbsp;Count of make: <strong>{{make_counts[vehicle_type.id]}}</strong></a></li>
+            {% endfor %}
+        </ul>
+    </div>    
+    
+{% endblock %}

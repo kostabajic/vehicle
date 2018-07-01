@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]-->
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <div id="sidebar">
+        {% set route = app.request.attributes.get('_route') %}
+        {% block sidebar %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    {#<div class="navbar-header">
+                      <a class="navbar-brand" href="#">WebSiteName</a>
+                    </div>#}
+                    <ul class="nav navbar-nav">
+                        <li {{ route ==  '/' ? 'class="active"' }}><a href="/">Vehicle types</a></li>
+                        <li {{ route ==  'show_import_vehicle_type' ? 'class="active"' }}><a href="/vehicle_type/show_import_vehicle_type">Import vehicle types</a></li>
+                        <li {{ route ==  'show_import_make' ? 'class="active"' }}><a href="/make/show_import_make">Import makes</a></li>
+                        <li {{ route ==  'show_import_model' ? 'class="active"' }}><a href="/model/show_import_model">Import models</a></li>
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block body %}{% endblock %}
+    </div>
+    <script src="{{ asset('build/js/app.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

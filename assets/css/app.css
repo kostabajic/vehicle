@@ -1,0 +1,11 @@
+ul{
+    padding-left: 0px;
+}
+.list-group-show{
+    border-radius: 4px;
+}
+li {
+    
+    list-style-type: none;
+    margin-bottom: 3px;
+}
